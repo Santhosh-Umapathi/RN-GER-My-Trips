@@ -5,15 +5,17 @@ import Colors from "../constants/Colors";
 
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../store/action";
+import ImageSelector from "../components/ImageSelector";
 
 const NewPlaceScreen = (props) => {
   const { navigation } = props;
   const [title, setTitle] = useState("");
+  const [image, setImage] = useState(null);
 
   const dispatch = useDispatch();
 
   const saveHandler = () => {
-    dispatch(actions.addPlace(title));
+    dispatch(actions.addPlace(title, image));
     navigation.goBack();
   };
 
@@ -22,6 +24,11 @@ const NewPlaceScreen = (props) => {
       <View style={styles.form}>
         <Text style={styles.label}>Title</Text>
         <TextInput style={styles.input} value={title} onChangeText={setTitle} />
+        <ImageSelector
+          onSelectImage={(val) => {
+            setImage(val);
+          }}
+        />
         <Button
           title="Save place"
           onPress={saveHandler}

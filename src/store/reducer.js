@@ -6,8 +6,8 @@ export const initialState = { places: [] };
 export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_PLACE:
-      const { title } = action.payload;
-      const newPlace = new Place(new Date().toString(), title);
+      const { title, image } = action.payload;
+      const newPlace = new Place(new Date().toString(), title, image);
       return { ...state, places: [...state.places, newPlace] };
 
     default:
