@@ -6,11 +6,13 @@ import Colors from "../constants/Colors";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../store/action";
 import ImageSelector from "../components/ImageSelector";
+import LocationSelector from "../components/LocationSelector";
 
 const NewPlaceScreen = (props) => {
   const { navigation } = props;
   const [title, setTitle] = useState("");
   const [image, setImage] = useState(null);
+  const [location, setLocation] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -27,6 +29,11 @@ const NewPlaceScreen = (props) => {
         <ImageSelector
           onSelectImage={(val) => {
             setImage(val);
+          }}
+        />
+        <LocationSelector
+          onSelectLocation={(val) => {
+            setLocation(val);
           }}
         />
         <Button
