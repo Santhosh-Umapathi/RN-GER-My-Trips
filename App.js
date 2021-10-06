@@ -6,14 +6,21 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
 import placesReducer from "./src/store/reducer";
+//Database
+import { initSQLite } from "./src/db";
+
+//Initialize Database on App Start
+initSQLite();
+// .then(() => console.log("initialized database"))
+// .catch((error) => console.log("Error database init", error));
+
+const rootReducer = combineReducers({
+  places: placesReducer,
+});
+
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 export default function App() {
-  const rootReducer = combineReducers({
-    places: placesReducer,
-  });
-
-  const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
-
   return (
     <Provider store={store}>
       <PlacesNavigator />
