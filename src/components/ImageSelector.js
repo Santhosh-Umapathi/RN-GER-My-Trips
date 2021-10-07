@@ -1,28 +1,17 @@
-import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-  Button,
-  Image,
-  FlatList,
-  Platform,
-  Alert,
-} from "react-native";
-import Colors from "../constants/Colors";
-
+import React, { useState } from "react";
+import { View, Text, StyleSheet, Button, Image, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 
+//Constants
+import Colors from "../constants/Colors";
+
 const ImageSelector = (props) => {
-  const { navigation, onSelectImage } = props;
+  const { onSelectImage } = props;
 
   const [selectedImage, setSelectedImage] = useState(null);
 
   const verifyPermissions = async () => {
     const permission = await ImagePicker.requestCameraPermissionsAsync();
-    // console.log("🚀 --- verifyPermissions --- permission", permission);
 
     if (permission.status !== "granted") {
       Alert.alert("Need camera permissions");
@@ -46,7 +35,6 @@ const ImageSelector = (props) => {
 
     setSelectedImage(image.uri);
     onSelectImage(image.uri);
-    // console.log("🚀 --- imageHandler --- image", image);
   };
 
   return (

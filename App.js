@@ -1,14 +1,17 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import PlacesNavigator from "./src/navigation/PlacesNavigator";
+import React, { useEffect, useState } from "react";
+//Redux
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
+import { Provider } from "react-redux";
+//Reducers
 import placesReducer from "./src/store/reducer";
 //Database
 import { initSQLite } from "./src/db";
+//ENV
 import ENV from "./env";
+//Screens
+import SplashScreen from "./src/screens/SplashScreen";
+import PlacesNavigator from "./src/navigation/PlacesNavigator";
 
 //Initialize Database on App Start
 initSQLite();
@@ -24,10 +27,20 @@ console.log("ENV =>", ENV.apiKey);
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
-export default function App() {
+const App = () => {
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowSplash(false);
+    }, 2000);
+  }, []);
+
   return (
     <Provider store={store}>
-      <PlacesNavigator />
+      {showSplash ? <SplashScreen /> : <PlacesNavigator />}
     </Provider>
   );
-}
+};
+
+export default App;

@@ -1,20 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TextInput, Button } from "react-native";
-import { ScrollView } from "react-navigation";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  Button,
+  ScrollView,
+} from "react-native";
+//Constants
 import Colors from "../constants/Colors";
-
-import { useDispatch, useSelector } from "react-redux";
+//Redux
+import { useDispatch } from "react-redux";
 import * as actions from "../store/action";
+//Components
 import ImageSelector from "../components/ImageSelector";
 import LocationSelector from "../components/LocationSelector";
 
 const NewPlaceScreen = (props) => {
   const { navigation } = props;
+  const dispatch = useDispatch();
+
   const [title, setTitle] = useState("");
   const [image, setImage] = useState(null);
   const [location, setLocation] = useState(null);
-
-  const dispatch = useDispatch();
 
   const saveHandler = () => {
     dispatch(actions.addPlace(title, image, location));
@@ -41,17 +49,8 @@ const NewPlaceScreen = (props) => {
   );
 };
 
-NewPlaceScreen.navigationOptions = (props) => {
-  const { navigation } = props;
-  return {
-    headerTitle: "Add Place",
-    // headerRight: (
-    //   <HeaderButton
-    //     iconName="ios-add"
-    //     onPress={() => navigation.navigate("NewPlace")}
-    //   />
-    // ),
-  };
+NewPlaceScreen.navigationOptions = {
+  headerTitle: "Add Place",
 };
 
 const styles = StyleSheet.create({

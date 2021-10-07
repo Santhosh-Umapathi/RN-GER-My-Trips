@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
-import HeaderButton from "../components/HeaderButton";
+//Components
 import MapPreview from "../components/MapPreview";
+//Constants
 import Colors from "../constants/Colors";
 
 const PlaceDetailScreen = (props) => {
@@ -25,9 +26,7 @@ const PlaceDetailScreen = (props) => {
               savedLocation: { lat: item.lat, lng: item.lng },
             })
           }
-        >
-          <Text>Test</Text>
-        </MapPreview>
+        />
       </View>
     </ScrollView>
   );
@@ -40,12 +39,6 @@ PlaceDetailScreen.navigationOptions = (props) => {
 
   return {
     headerTitle: item.title,
-    // headerRight: (
-    //   <HeaderButton
-    //     iconName="ios-add"
-    //     onPress={() => navigation.navigate("NewPlace")}
-    //   />
-    // ),
   };
 };
 

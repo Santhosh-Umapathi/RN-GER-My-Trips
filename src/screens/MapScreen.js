@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
 import MapView, { Marker } from "react-native-maps";
+//Components
 import HeaderButton from "../components/HeaderButton";
 
 const MapScreen = (props) => {
@@ -44,7 +44,7 @@ const MapScreen = (props) => {
 
   return (
     <MapView
-      style={styles.map}
+      style={{ flex: 1 }}
       region={region}
       onPress={() => !readOnly && onTap()}
     >
@@ -67,11 +67,5 @@ MapScreen.navigationOptions = (props) => {
     ),
   };
 };
-
-const styles = StyleSheet.create({
-  map: {
-    flex: 1,
-  },
-});
 
 export default MapScreen;

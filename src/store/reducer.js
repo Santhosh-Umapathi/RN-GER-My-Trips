@@ -1,8 +1,10 @@
+//Model
 import Place from "../model/place";
+//Types
 export const ADD_PLACE = "ADD_PLACE";
 export const SET_PLACES = "SET_PLACES";
-
-export const initialState = { places: [] };
+//Initial State
+const initialState = { places: [] };
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -23,7 +25,6 @@ export default (state = initialState, action) => {
             item.address
           )
       );
-      // console.log("🚀 --- transformedData", transformedData);
       return { ...state, places: transformedData };
 
     default:

@@ -1,3 +1,4 @@
 export default {
-    primary: '#fc9208'
-}
+  primary: "#FB5B5B",
+  splash: "#FBFBFB",
+};

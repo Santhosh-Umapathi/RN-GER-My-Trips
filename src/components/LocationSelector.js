@@ -7,19 +7,19 @@ import {
   ActivityIndicator,
   Alert,
 } from "react-native";
+//Constants
 import Colors from "../constants/Colors";
 //Location picker
 import * as LocationPicker from "expo-location";
+//Components
 import MapPreview from "./MapPreview";
 
 const LocationSelector = (props) => {
   const { navigation, onSelectLocation } = props;
+  const selectedPlace = navigation.getParam("selectedPlace");
 
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
-  const selectedPlace = navigation.getParam("selectedPlace");
-  // console.log("🚀 --- LocationSelector --- selectedPlace", selectedPlace);
 
   useEffect(() => {
     if (selectedPlace) {
@@ -30,7 +30,6 @@ const LocationSelector = (props) => {
 
   const verifyPermissions = async () => {
     const permission = await LocationPicker.requestForegroundPermissionsAsync();
-    // console.log("🚀 --- verifyPermissions --- permission", permission);
 
     if (permission.status !== "granted") {
       Alert.alert("Need location permissions");
@@ -50,7 +49,6 @@ const LocationSelector = (props) => {
       const location = await LocationPicker.getCurrentPositionAsync({
         // timeInterval: 5000,
       });
-      // console.log("🚀 --- getLocation --- location", location);
       setSelectedLocation({
         lat: location.coords.latitude,
         lng: location.coords.longitude,
@@ -60,15 +58,12 @@ const LocationSelector = (props) => {
         lng: location.coords.longitude,
       });
     } catch (error) {
-      // console.log("🚀 --- getLocation --- error", error);
       Alert.alert("Cannot get the location");
     }
     setIsLoading(false);
   };
 
-  const pickOnMap = () => {
-    navigation.navigate("Map");
-  };
+  const pickOnMap = () => navigation.navigate("Map");
 
   return (
     <View style={styles.containerView}>
