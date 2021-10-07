@@ -25,6 +25,9 @@ const MapScreen = (props) => {
   }
 
   const onTap = (event) => {
+    if (readOnly) {
+      return;
+    }
     setSelectedPlace({
       lat: event.nativeEvent.coordinate.latitude,
       lng: event.nativeEvent.coordinate.longitude,
@@ -43,11 +46,7 @@ const MapScreen = (props) => {
   }, [onSave]);
 
   return (
-    <MapView
-      style={{ flex: 1 }}
-      region={region}
-      onPress={() => !readOnly && onTap()}
-    >
+    <MapView style={{ flex: 1 }} region={region} onPress={onTap}>
       {markerCoordinates && (
         <Marker title="pickedLocation" coordinate={markerCoordinates}></Marker>
       )}
