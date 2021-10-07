@@ -4,15 +4,12 @@ import Mapbox from "../constants/Mapbox";
 
 const MapPreview = (props) => {
   const { location, onPress } = props;
-  console.log("🚀 --- MapPreview --- location", location);
 
   let imagePreviewUrl;
 
   if (location) {
     imagePreviewUrl = `${Mapbox.url}styles/v1/mapbox/${Mapbox.style}static/${Mapbox.marker}(${location.lng},${location.lat})/${location.lng},${location.lat},${Mapbox.zoom},0/${Mapbox.size}?access_token=${Mapbox.token}`;
   }
-
-  console.log("🚀 --- MapPreview --- imagePreviewUrl", imagePreviewUrl);
 
   return (
     <TouchableOpacity
@@ -33,7 +30,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 10,
-    // backgroundColor: "blue",
   },
 
   image: { width: "100%", height: "100%" },

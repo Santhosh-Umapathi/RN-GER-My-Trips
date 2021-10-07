@@ -5,11 +5,13 @@ import HeaderButton from "../components/HeaderButton";
 
 const MapScreen = (props) => {
   const { navigation } = props;
-  const [selectedPlace, setSelectedPlace] = useState();
+  const readOnly = navigation.getParam("readOnly");
+  const savedLocation = navigation.getParam("savedLocation");
+  const [selectedPlace, setSelectedPlace] = useState(savedLocation);
 
   const region = {
-    latitude: 37.78,
-    longitude: -122.43,
+    latitude: savedLocation ? savedLocation.lat : 37.78,
+    longitude: savedLocation ? savedLocation.lng : -122.43,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   };
@@ -41,7 +43,11 @@ const MapScreen = (props) => {
   }, [onSave]);
 
   return (
-    <MapView style={styles.map} region={region} onPress={onTap}>
+    <MapView
+      style={styles.map}
+      region={region}
+      onPress={() => !readOnly && onTap()}
+    >
       {markerCoordinates && (
         <Marker title="pickedLocation" coordinate={markerCoordinates}></Marker>
       )}
@@ -52,9 +58,13 @@ const MapScreen = (props) => {
 MapScreen.navigationOptions = (props) => {
   const { navigation } = props;
   const onSave = navigation.getParam("onSave");
+  const readOnly = navigation.getParam("readOnly");
+
   return {
     headerTitle: "Maps",
-    headerRight: <HeaderButton iconName="ios-save" onPress={onSave} />,
+    headerRight: !readOnly && (
+      <HeaderButton iconName="ios-save" onPress={onSave} />
+    ),
   };
 };
 

@@ -8,7 +8,6 @@ const PlaceDetailScreen = (props) => {
   const { navigation } = props;
 
   const item = navigation.getParam("item");
-  console.log("🚀 --- PlaceDetailScreen --- item", item);
 
   return (
     <ScrollView contentContainerStyle={{ alignItems: "center" }}>
@@ -20,6 +19,12 @@ const PlaceDetailScreen = (props) => {
         <MapPreview
           location={{ lat: item.lat, lng: item.lng }}
           style={styles.mapPreview}
+          onPress={() =>
+            navigation.navigate("Map", {
+              readOnly: true,
+              savedLocation: { lat: item.lat, lng: item.lng },
+            })
+          }
         >
           <Text>Test</Text>
         </MapPreview>
