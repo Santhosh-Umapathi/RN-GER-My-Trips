@@ -15,8 +15,6 @@ const PlacesListScreen = (props) => {
     dispatch(actions.loadPlaces());
   }, [dispatch]);
 
-  console.log("state.places", state.places);
-
   return (
     <View>
       <FlatList
@@ -25,13 +23,12 @@ const PlacesListScreen = (props) => {
         renderItem={({ item }) => {
           return (
             <PlaceItem
-              address={""}
+              address={item.address}
               image={item.image}
               title={item.title}
               onSelect={() => {
                 navigation.navigate("PlaceDetail", {
-                  placeTitle: item.title,
-                  placeId: item.id,
+                  item,
                 });
               }}
             />

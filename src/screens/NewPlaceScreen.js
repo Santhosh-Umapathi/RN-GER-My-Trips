@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TextInput, Button } from "react-native";
 import { ScrollView } from "react-navigation";
 import Colors from "../constants/Colors";
@@ -17,7 +17,7 @@ const NewPlaceScreen = (props) => {
   const dispatch = useDispatch();
 
   const saveHandler = () => {
-    dispatch(actions.addPlace(title, image));
+    dispatch(actions.addPlace(title, image, location));
     navigation.goBack();
   };
 
@@ -26,15 +26,10 @@ const NewPlaceScreen = (props) => {
       <View style={styles.form}>
         <Text style={styles.label}>Title</Text>
         <TextInput style={styles.input} value={title} onChangeText={setTitle} />
-        <ImageSelector
-          onSelectImage={(val) => {
-            setImage(val);
-          }}
-        />
+        <ImageSelector onSelectImage={setImage} />
         <LocationSelector
-          onSelectLocation={(val) => {
-            setLocation(val);
-          }}
+          onSelectLocation={setLocation}
+          navigation={navigation}
         />
         <Button
           title="Save place"

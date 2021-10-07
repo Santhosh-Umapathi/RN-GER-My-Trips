@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -17,6 +17,16 @@ const LocationSelector = (props) => {
 
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const selectedPlace = navigation.getParam("selectedPlace");
+  // console.log("🚀 --- LocationSelector --- selectedPlace", selectedPlace);
+
+  useEffect(() => {
+    if (selectedPlace) {
+      setSelectedLocation(selectedPlace);
+      onSelectLocation(selectedPlace);
+    }
+  }, [selectedPlace]);
 
   const verifyPermissions = async () => {
     const permission = await LocationPicker.requestForegroundPermissionsAsync();
@@ -56,20 +66,35 @@ const LocationSelector = (props) => {
     setIsLoading(false);
   };
 
+  const pickOnMap = () => {
+    navigation.navigate("Map");
+  };
+
   return (
     <View style={styles.containerView}>
-      <MapPreview style={styles.map} location={selectedLocation}>
+      <MapPreview
+        style={styles.map}
+        location={selectedLocation}
+        onPress={pickOnMap}
+      >
         {isLoading ? (
           <ActivityIndicator size="large" color={Colors.primary} />
         ) : (
           <Text>No Location chosen yet</Text>
         )}
       </MapPreview>
-      <Button
-        title="Get Location"
-        color={Colors.primary}
-        onPress={getLocation}
-      />
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Get Location"
+          color={Colors.primary}
+          onPress={getLocation}
+        />
+        <Button
+          title="Pick on Map"
+          color={Colors.primary}
+          onPress={pickOnMap}
+        />
+      </View>
     </View>
   );
 };
@@ -83,12 +108,22 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 150,
     borderColor: Colors.primary,
-    borderWidth: 1,
+    borderWidth: 0.5,
     justifyContent: "center",
     alignItems: "center",
+    borderRadius: 5,
+    shadowColor: "orange",
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 5,
+    shadowOpacity: 0.3,
   },
   text: {
     fontSize: 20,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-around",
   },
 });
 

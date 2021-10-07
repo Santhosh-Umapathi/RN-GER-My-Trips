@@ -1,24 +1,30 @@
 import React from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import Mapbox from "../constants/Mapbox";
 
 const MapPreview = (props) => {
-  const { location } = props;
+  const { location, onPress } = props;
+  console.log("🚀 --- MapPreview --- location", location);
 
   let imagePreviewUrl;
 
   if (location) {
-    imagePreviewUrl = `${Mapbox.url}${Mapbox.style}static/${Mapbox.marker}(${location.lng},${location.lat})/${location.lng},${location.lat},${Mapbox.zoom},0/${Mapbox.size}?access_token=${Mapbox.token}`;
+    imagePreviewUrl = `${Mapbox.url}styles/v1/mapbox/${Mapbox.style}static/${Mapbox.marker}(${location.lng},${location.lat})/${location.lng},${location.lat},${Mapbox.zoom},0/${Mapbox.size}?access_token=${Mapbox.token}`;
   }
 
+  console.log("🚀 --- MapPreview --- imagePreviewUrl", imagePreviewUrl);
+
   return (
-    <View style={{ ...styles.containerView, ...props.style }}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={{ ...styles.containerView, ...props.style }}
+    >
       {location ? (
         <Image source={{ uri: imagePreviewUrl }} style={styles.image} />
       ) : (
         props.children
       )}
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -27,6 +33,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 10,
+    // backgroundColor: "blue",
   },
 
   image: { width: "100%", height: "100%" },
