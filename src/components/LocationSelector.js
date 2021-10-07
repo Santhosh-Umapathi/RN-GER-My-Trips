@@ -1,20 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
-  TextInput,
   StyleSheet,
-  TouchableOpacity,
   Button,
-  Image,
-  FlatList,
-  Platform,
   ActivityIndicator,
   Alert,
 } from "react-native";
 import Colors from "../constants/Colors";
 //Location picker
 import * as LocationPicker from "expo-location";
+import MapPreview from "./MapPreview";
 
 const LocationSelector = (props) => {
   const { navigation, onSelectLocation } = props;
@@ -62,13 +58,13 @@ const LocationSelector = (props) => {
 
   return (
     <View style={styles.containerView}>
-      <View style={styles.map}>
+      <MapPreview style={styles.map} location={selectedLocation}>
         {isLoading ? (
           <ActivityIndicator size="large" color={Colors.primary} />
         ) : (
           <Text>No Location chosen yet</Text>
         )}
-      </View>
+      </MapPreview>
       <Button
         title="Get Location"
         color={Colors.primary}

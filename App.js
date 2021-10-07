@@ -8,6 +8,7 @@ import ReduxThunk from "redux-thunk";
 import placesReducer from "./src/store/reducer";
 //Database
 import { initSQLite } from "./src/db";
+import ENV from "./env";
 
 //Initialize Database on App Start
 initSQLite();
@@ -17,6 +18,9 @@ initSQLite();
 const rootReducer = combineReducers({
   places: placesReducer,
 });
+
+//ENV test
+console.log("ENV =>", ENV.apiKey);
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
