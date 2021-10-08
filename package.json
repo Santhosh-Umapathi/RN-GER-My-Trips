@@ -5,6 +5,14 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
+    "publish": "expo publish",
+    "build:android:apk": "expo build:android -t apk",
+    "build:android:bundle": "expo build:android -t app-bundle",
+    "fetch": "expo fetch:android:keystore",
+    "build:ios:archive": "expo build:ios -t archive",
+    "build:ios:simulator": "expo build:ios -t simulator",
+    "upload:ios": "expo upload:ios",
+    "upload:android": "expo upload:android",
     "eject": "expo eject"
   },
   "dependencies": {
