@@ -29,6 +29,7 @@ This project is created for educational purposes. Learn Next Js from scratch wit
 - Camera
 - Permissions
 - Env's
+- Dot ENV
 
 ## Learn More
 

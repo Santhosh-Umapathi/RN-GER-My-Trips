@@ -1,7 +1,8 @@
+import { MAPBOX_API_KEY } from "@env";
+
 export default MapBox = {
   url: "https://api.mapbox.com/",
-  token:
-    "pk.eyJ1Ijoic25hdGhvc2gtdW1hcGF0aGkiLCJhIjoiY2t1Z3NwajBlMjczYTJvbW85Mmx0Nnh3ZiJ9.OGUPl-Y0TrsoTnnn0CHz_w",
+  token: MAPBOX_API_KEY,
   marker: "pin-s+555555",
   zoom: 12,
   style: "streets-v11/",
